@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'rest_framework',
 ]
+# For React to connect Django, which do Cross-Origin Resource Sharing.
+INSTALLED_APPS += ['corsheaders']
 
 ## WARNING: any middleware depdencies should be included first.
 ##
@@ -41,6 +43,12 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.security.SecurityMiddleware',
+]
+# For React to connect Django, which do Cross-Origin Resource Sharing.
+MIDDLEWARE = ['corsheaders.middleware.CorsMiddleware'] + MIDDLEWARE
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Vite or React dev server
 ]
 
 ROOT_URLCONF = 'blry_website.urls'
