@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.messages',
     'rest_framework',
+    'rest_framework_simplejwt',
 ]
 # For React to connect Django, which do Cross-Origin Resource Sharing.
 INSTALLED_APPS += ['corsheaders']
@@ -52,6 +53,12 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 ROOT_URLCONF = 'blry_website.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
 TEMPLATES = [
     {
