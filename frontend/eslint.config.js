@@ -1,52 +1,29 @@
 import js from '@eslint/js';
-import prettier from 'eslint-config-prettier';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import { defineConfig, globalIgnores } from 'eslint/config';
 
-export default [
+export default defineConfig([
+  globalIgnores(['dist']),
   {
-    ignores: [
-      'node_modules/**',
-      '.yarn/**',
-      '.venv/**',
-      'venv/**',
-      'env/**',
-      'dist/**',
-      'build/**',
-      '*.min.js',
-      '.cache/**',
-      '.parcel-cache/**',
-      'package-lock.json',
-      'yarn.lock',
-      '.env*',
-      'staticfiles/**',
-      'static/**',
-      'coverage/**',
+    files: ['**/*.{js,jsx}'],
+    extends: [
+      js.configs.recommended,
+      reactHooks.configs['recommended-latest'],
+      reactRefresh.configs.vite,
     ],
-  },
-  js.configs.recommended,
-  prettier,
-  {
     languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
-      globals: {
-        console: 'readonly',
-        process: 'readonly',
-        Buffer: 'readonly',
-        __dirname: 'readonly',
-        __filename: 'readonly',
-        exports: 'writable',
-        global: 'readonly',
-        module: 'readonly',
-        require: 'readonly',
-        window: 'readonly',
-        document: 'readonly',
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
       },
     },
     rules: {
-      'no-unused-vars': 'warn',
-      'no-console': 'warn',
-      'prefer-const': 'error',
-      'no-var': 'error',
+      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
-];
+]);

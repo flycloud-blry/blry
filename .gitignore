@@ -1,9 +1,6 @@
 ## The list below is sorted alphabetically by headings, with the file patterns
 ## under each heading also sorted alphabetically.
 
-# macOS system files
-.DS_Store
-
 # Build directories
 build/
 dist/
@@ -18,6 +15,9 @@ dist/
 
 # Logs
 *.log
+
+# macOS system files
+.DS_Store
 
 # Node.js dependencies
 node_modules/
